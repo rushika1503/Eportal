@@ -1,0 +1,44 @@
+<div class="show-class">
+<div class="col-md-9">
+<p class="spacing-class">
+    <div class="card " style="border-radius :25px">
+            <div class="card mb-3" , style="height:12rem">
+                <%if @employee.bgimage.attached?%>
+                <%= image_tag (@employee.bgimage),class:"card-img-top", style:"height:12em"%>
+                <%else%>
+                <img class="card", style="height:12rem" src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="Card image cap">
+                <%end%>
+            </div>
+            <div class="card-body pt-5", style="margin-top:-9em;z-index: 1000;">
+                <%if @employee.image.attached?%>
+                <%= image_tag (@employee.image), class:"rounded-circle", style:"width: 10em;height: 10em;
+    margin-left: 2em",alt:"profile-image"%>
+                <%else%>
+                <img class="rounded-circle", style="width: 10em;height: 10em;
+    margin-left: 2em", src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fkacrm.datamaticsbpm.com%2Fassets%2Fimg%2Fuser-img-icon.png&imgrefurl=https%3A%2F%2Fkacrm.datamaticsbpm.com%2Fassets%2Fimg%2F&tbnid=ZaLo6TB5r9AT4M&vet=12ahUKEwj33Nb_0eTxAhWSm-YKHXUrDcUQMygaegUIARDvAQ..i&docid=-0NZpfZcAo9XNM&w=512&h=512&q=account%20img&hl=en&ved=2ahUKEwj33Nb_0eTxAhWSm-YKHXUrDcUQMygaegUIARDvAQ" alt="Card image cap">
+                <%end%>
+                <div class="container">
+                  <h5 class="card-title" style="margin-top:0.5em"><i class="fas fa-pencil-alt icon-edit" aria-hidden="true"></i><%= @employee.first_name%> <%= @employee.last_name%></h5>
+                  <p class="black-name"><%=@employee.about%></p>
+                  <p class="card-text"><%=@employee.location%> . <%=link_to 'Contact info', "#contact_modal","data-toggle" => "modal"%> </p>
+                </div>
+            </div>
+    </div>
+    </p>
+  
+
+   <p class="spacing-class" >
+  <% if @employee.experiences.exists? %>
+        <div class="card experinece-card" style="border-radius :25px">
+              <div class="card-body ">
+                  <h5 class="card-title"><i class="fas fa-pencil-alt icon-edit" aria-hidden="true"></i>Experience</h5>
+                  <div class="card-content">
+                    <%= render partial:"experiences/list_experiences" %>
+                  </div>
+              </div>
+        </div>
+    <%end%>
+    </p>
+
+</div>
+</div> 

@@ -1,0 +1,10 @@
+<% @employee.experiences.each do |exp|%>
+  <div class= "container">
+  <br/>
+  <p class="role-name"><%= exp.title%></p>
+  <p class="black-name"><%= exp.company_name%> . <%= exp.employement_type%></p>
+  <p class="grey-class"><%=exp.start_date%> To <%=exp.end_date%></p>
+  <p class="grey-class"><%= exp.location %> </p>
+  <hr class="my-4">
+  </div>                  
+<% end %>

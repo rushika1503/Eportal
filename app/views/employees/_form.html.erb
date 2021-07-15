@@ -1,0 +1,143 @@
+<%= form_for@employee do |form| %>
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+        <% employee.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="card" style="width: 70rem;">
+    <div class="card-body">
+      <h5 class="card-title">Profile</h5>
+      <div class="row">
+        <div class="col">
+        <%=form.label :firstname%>
+          <%= form.text_field :first_name, class:"form-control" ,placeholder: "First name"%>
+        </div>
+        <div class="col">
+          <%=form.label :lastname%>
+          <%= form.text_field :last_name, class:"form-control" ,placeholder: "Last name"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+        <%=form.label :DateofBirth%>
+          <%= form.text_field :dob, class:"form-control" ,placeholder: "Date of Birth"%>
+        </div>
+        <div class="col">
+          <%= form.label :Gender %>
+          <p class="form"><%=form.radio_button :gender, 'Male'%> Male
+          <%=form.radio_button :gender, 'Female'%> Female
+          <%=form.radio_button :gender, 'Others'%> Others</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=form.label :Contact%>
+          <%= form.text_field :contact, class:"form-control" ,placeholder: "Contact"%>
+        </div>
+        <div class="col">
+          <%=form.label :Email%>
+          <%= form.text_field :email, class:"form-control" ,placeholder: "Email"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=form.label :Country%>
+          <%= form.text_field :country, class:"form-control" ,placeholder: "Country"%>
+        </div>
+        <div class="col">
+          <%=form.label :Location%>
+          <%= form.text_field :location, class:"form-control" ,placeholder: "Location"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=form.label :About%>
+          <%= form.text_area :about, class:"form-control" ,placeholder: "About"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=form.label :Skills%>
+          <%= form.text_area :skills, class:"form-control" ,placeholder: "write your skill set here"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=form.label :Industry%>
+          <%= form.text_field :industry, class:"form-control" ,placeholder: "Industry"%>
+        </div>
+        <div class="col">
+          <%=form.label :CurrentPosition%>
+          <%= form.text_field :current_position, class:"form-control" ,placeholder: "Current Position"%>
+        </div>
+        <div class="col">
+            <div class= "field form-group">
+              <%=form.label :Profile_Image%>
+              <%=form.file_field :image, class:"form-control"%>
+            </div>
+        </div>
+        <div class="col">
+            <div class= "field form-group">
+              <%=form.label :Cover_Image%>
+              <%=form.file_field :bgimage, class:"form-control"%>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <br/>
+  <div class="card" style="width: 70rem;">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class = "field form-group">
+            <%=form.label :Experience,class:"form-heading"%>  
+            <%= form.fields_for :experiences do |f| %>
+              <%=render 'experience_fields', f: f %>
+            <% end %>
+            <%= link_to_add_fields 'Add', form, :experiences %><br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <br/>
+  <% if @employee.persisted? %>
+    <div class = "form-button">
+        <br/>
+        <%= form.submit 'Update', class: "btn btn-dark" %>
+    </div>
+  <% else %>
+    <div class = "form-button">
+        <br/>
+        <%= form.submit 'Add', class: "btn btn-secondary" %>
+    </div>
+  <% end %> 
+  
+<% end %>
+<script>
+
+ $('form').on('click','.add_fields', function(event){
+   console.log("clicked!");
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    return event.preventDefault();
+ });
+
+  $('form').on('click','.remove_fields', function(event){
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('fieldset').hide();
+    return event.preventDefault();
+  });
+
+
+</script>
